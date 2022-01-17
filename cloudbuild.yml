@@ -1,14 +1,13 @@
-# [START cloudrun_rails_cloudbuild]
 steps:
   - id: "build image"
     name: "gcr.io/cloud-builders/docker"
     entrypoint: 'bash'
-    args: ["-c", "docker build --build-arg MASTER_KEY=$$RAILS_KEY --build-arg RAILS_ENV=production -t gcr.io/${PROJECT_ID}/${_SERVICE_NAME} . "]
+    args: ["-c", "docker build --build-arg MASTER_KEY=$$RAILS_KEY --build-arg RAILS_ENV=production -t $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA . "]
     secretEnv: ["RAILS_KEY"]
 
   - id: "push image"
     name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
+    args: ["push", "$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
 
   - id: "apply migrations"
     name: "gcr.io/google-appengine/exec-wrapper"
@@ -16,7 +15,7 @@ steps:
     args:
       [
         "-c",
-        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_DEPLOY_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=$$RAILS_KEY -- bundle exec rails db:migrate"
+        "/buildstep/execute.sh -i $_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA -s ${PROJECT_ID}:${_DEPLOY_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=$$RAILS_KEY -- bundle exec rails db:migrate"
       ]
     secretEnv: ["RAILS_KEY"]
 
@@ -50,5 +49,4 @@ availableSecrets:
     env: RAILS_KEY
 
 images:
-  - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
-# [END cloudrun_rails_cloudbuild]
+  - "$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
