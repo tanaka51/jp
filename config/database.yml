@@ -4,8 +4,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
   # for docker-compose
-  host: localhost
-  port: 15432
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
+  port: <%= ENV.fetch("DATABASE_PORT") { 15432 } %>
   username: postgres
   password: postgres
 
