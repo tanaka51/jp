@@ -19,6 +19,8 @@ test:
 
 production:
   <<: *default
-  database: jp_production
-  username: jp
-  password: <%= ENV["JP_DATABASE_PASSWORD"] %>
+  database: <%= ENV["PRODUCTION_DB_NAME"] %>
+  username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
+  password: <%= Rails.application.credentials.gcp[:db_password] %>
+  host: "<%= ENV.fetch("DB_SOCKET_DIR") { '/cloudsql' } %>/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>"
+
