@@ -17,4 +17,6 @@ ENV RAILS_MASTER_KEY=${MASTER_KEY}
 ARG RAILS_ENV
 ENV RAILS_ENV=${RAILS_ENV}
 
+RUN bin/rails assets:precompile
+
 CMD ["rails", "server", "-b", "0.0.0.0"]
