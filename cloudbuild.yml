@@ -16,15 +16,33 @@ steps:
     args:
       [
         "-c",
-        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=$$RAILS_KEY -- bundle exec rails db:migrate"
+        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_DEPLOY_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=$$RAILS_KEY -- bundle exec rails db:migrate"
       ]
     secretEnv: ["RAILS_KEY"]
 
+  - id: "Deploy"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - "--platform=managed"
+      - "--image=$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"
+      - >-
+        --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID,$_LABELS
+      - "--region=$_DEPLOY_REGION"
+      - "--quiet"
+
 substitutions:
-  _REGION: asia-northeast1
   _SERVICE_NAME: tanaka51-jp
   _INSTANCE_NAME: tanaka51-jp
   _SECRET_NAME: RAILS_SECRET_NAME
+  _DEPLOY_REGION: asia-northeast1
+  _LABELS: gcb-trigger-id=96560acf-1aa3-4525-b49d-01d4b749d6e4
+  _TRIGGER_ID: 96560acf-1aa3-4525-b49d-01d4b749d6e4
+  _GCR_HOSTNAME: asia.gcr.io
+  _PLATFORM: managed
 
 availableSecrets:
   secretManager:
