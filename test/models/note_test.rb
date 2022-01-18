@@ -3,7 +3,8 @@
 require 'test_helper'
 
 class NoteTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'set number before validation' do
+    note = Note.new.tap(&:valid?)
+    assert_not_nil note.number
+  end
 end

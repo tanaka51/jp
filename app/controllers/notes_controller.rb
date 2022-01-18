@@ -3,5 +3,7 @@
 class NotesController < ApplicationController
   def index; end
 
-  def show; end
+  def show
+    @note = Note.published.find_by!(number: params[:number])
+  end
 end
