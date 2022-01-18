@@ -1,11 +1,7 @@
-# jp
+https://tanaka51.jp
 
-this is for tanaka51.jp
-
-## setup development environment
-
-middlewares are managed by docker-compose
 
 ```
-docker-compose up
+docker-compose up -d db
+bin/rails s
 ```
