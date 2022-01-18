@@ -5,6 +5,7 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.hosts << 'tanaka51-jp-titquw7mzq-an.a.run.app'
+  config.hosts << 'tanaka51.jp'
 
   # Code is not reloaded between requests.
   config.cache_classes = true
