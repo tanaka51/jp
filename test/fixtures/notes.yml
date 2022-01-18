@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  number: MyString
-  title: MyString
-  content: MyText
+  number: vNe5i7tmS5nwjliJ
+  title: title1
+  content: content1
   published_at: 2022-01-18 23:01:07
 
 two:
-  number: MyString
-  title: MyString
-  content: MyText
+  number: pGTMItMmLcgDbqLn
+  title: title2
+  content: content2
   published_at: 2022-01-18 23:01:07
