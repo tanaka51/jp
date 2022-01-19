@@ -10,6 +10,10 @@ class Note < ApplicationRecord
   validates :number, presence: true, uniqueness: true
   validates :title, presence: true
 
+  def to_param
+    number
+  end
+
   private
 
   def set_uniq_number

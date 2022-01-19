@@ -1,2 +1,5 @@
-<div id="<%= dom_id note %>">
-</div>
+<article id="<%= dom_id note %>">
+  <h1><%= note.title %></h1>
+  <time><%= note.published_at %></time>
+  <p><%= note.content %></p>
+</article>

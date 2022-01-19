@@ -4,11 +4,10 @@
 
 <div id="notes">
   <% @notes.each do |note| %>
-    <%= render note %>
     <p>
-      <%= link_to "Show this note", note %>
+      <%= link_to note.title, admin_note_path(note) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New note", new_note_path %>
+<%= link_to "New note", new_admin_note_path %>
