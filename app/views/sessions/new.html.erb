@@ -1,2 +1,16 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<h1>ログイン</h1>
+<% if @session_form.errors.any? %>
+  <ul>
+  <% @session_form.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @session_form, url: sessions_url, method: :post do |f| %>
+  <%= f.label :login_id, 'ログインID' %>
+  <%= f.text_field :login_id %>
+  <%= f.label :password, 'パスワード' %>
+  <%= f.text_field :password %>
+  <%= f.submit 'ログイン' %>
+<% end %>

@@ -12,4 +12,8 @@
   <body>
     <%= yield %>
   </body>
+
+  <% if logged_in? %>
+    <%= button_to 'ログアウト', logout_url, method: :delete %>
+  <% end %>
 </html>
