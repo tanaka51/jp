@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :notes
+  end
   root 'top#show'
 
   get 'login', to: 'sessions#new'
@@ -8,4 +11,5 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   resources :notes, path: 'n', param: 'number', only: %i[index show]
+
 end
