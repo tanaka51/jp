@@ -2,6 +2,7 @@
 
 module Admin
   class NotesController < ApplicationController
+    before_action :require_login
     before_action :set_note, only: %i[show edit update destroy]
 
     def index
