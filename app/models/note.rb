@@ -5,7 +5,7 @@ class Note < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
 
-  before_validation :set_uniq_number
+  before_validation :set_uniq_number, unless: :number
 
   validates :number, presence: true, uniqueness: true
   validates :title, presence: true
