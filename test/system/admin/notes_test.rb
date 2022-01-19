@@ -1,39 +1,43 @@
-require "application_system_test_case"
+# frozen_string_literal: true
 
-class Admin::NotesTest < ApplicationSystemTestCase
-  setup do
-    @admin_note = admin_notes(:one)
-  end
+require 'application_system_test_case'
 
-  test "visiting the index" do
-    visit admin_notes_url
-    assert_selector "h1", text: "Notes"
-  end
+module Admin
+  class NotesTest < ApplicationSystemTestCase
+    setup do
+      @admin_note = admin_notes(:one)
+    end
 
-  test "should create note" do
-    visit admin_notes_url
-    click_on "New note"
+    test 'visiting the index' do
+      visit admin_notes_url
+      assert_selector 'h1', text: 'Notes'
+    end
 
-    click_on "Create Note"
+    test 'should create note' do
+      visit admin_notes_url
+      click_on 'New note'
 
-    assert_text "Note was successfully created"
-    click_on "Back"
-  end
+      click_on 'Create Note'
 
-  test "should update Note" do
-    visit admin_note_url(@admin_note)
-    click_on "Edit this note", match: :first
+      assert_text 'Note was successfully created'
+      click_on 'Back'
+    end
 
-    click_on "Update Note"
+    test 'should update Note' do
+      visit admin_note_url(@admin_note)
+      click_on 'Edit this note', match: :first
 
-    assert_text "Note was successfully updated"
-    click_on "Back"
-  end
+      click_on 'Update Note'
 
-  test "should destroy Note" do
-    visit admin_note_url(@admin_note)
-    click_on "Destroy this note", match: :first
+      assert_text 'Note was successfully updated'
+      click_on 'Back'
+    end
 
-    assert_text "Note was successfully destroyed"
+    test 'should destroy Note' do
+      visit admin_note_url(@admin_note)
+      click_on 'Destroy this note', match: :first
+
+      assert_text 'Note was successfully destroyed'
+    end
   end
 end

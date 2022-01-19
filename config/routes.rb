@@ -11,5 +11,4 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   resources :notes, path: 'n', param: 'number', only: %i[index show]
-
 end
