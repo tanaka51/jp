@@ -1,0 +1,6 @@
+<h1>ランダムに３つ記事が表示される</h1>
+<ul>
+  <% @notes.each do |note| %>
+    <li><%= link_to note.title, note_url(note) %></li>
+  <% end %>
+</ul>
