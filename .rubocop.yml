@@ -4,7 +4,11 @@ AllCops:
   NewCops: enable
   Exclude:
     - 'db/**/*.rb'
-    - 'bin/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'test/fixtures/**/*'
+    - 'tmp/**/*'
+
 
 Style/Documentation:
   Enabled: false
